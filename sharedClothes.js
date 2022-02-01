@@ -3,20 +3,21 @@
 //풀이
 
 //TODO.....
+//TODO.....
 function solution(n, lost, reserve) {
   
   let cantPm = 0;
   let countMoreClothes = lost.filter(el => !reserve.includes(el));
   let countLost = reserve.filter(el => !lost.includes(el));
 
-  // cantPm = countMoreClothes.filter(lost => {
-  //   let boundaryClothes = countLost.find(el => Math.abs(el-lost) <= 1);
+  cantPm = countMoreClothes.filter(lost => {
+    let boundaryClothes = countLost.find(el => Math.abs(el-lost) <= 1);
 
-  //   if(!boundaryClothes) return true
+    if(!boundaryClothes) return true
 
-  //   cantPm = countLost.filter(el => el !== boundaryClothes)
+    cantPm = countLost.filter(el => el !== boundaryClothes)
 
-  // }).length;
+  }).length;
   // return n - cantPm
   // for(let i=0; i < countLost.lenght; i++){
   //   for(let j = 0; j < countMoreClothes.lenght; j++){
