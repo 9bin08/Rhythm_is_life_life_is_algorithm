@@ -2,31 +2,26 @@
 // 체육복
 //풀이
 
-//TODO.....
-//TODO.....
 function solution(n, lost, reserve) {
-  
-  let cantPm = 0;
-  let countMoreClothes = lost.filter(el => !reserve.includes(el));
-  let countLost = reserve.filter(el => !lost.includes(el));
 
-  cantPm = countMoreClothes.filter(lost => {
-    let boundaryClothes = countLost.find(el => Math.abs(el-lost) <= 1);
+  let tmp = reserve.slice();
 
-    if(!boundaryClothes) return true
+  for (let i in tmp) {
+      let key = lost.indexOf(tmp[i]);
+      if (key != -1) {
+          lost.splice(key, 1);
+          reserve.splice(reserve.indexOf(tmp[i]), 1);
+      }
+  }
 
-    cantPm = countLost.filter(el => el !== boundaryClothes)
+  for (let i of reserve) {
+      let key = lost.includes(i - 1)
+          ? lost.indexOf(i - 1)
+          : lost.indexOf(i + 1);
+      if (key != -1) {
+          lost.splice(key, 1);
+      }
+  }
 
-  }).length;
-  // return n - cantPm
-  // for(let i=0; i < countLost.lenght; i++){
-  //   for(let j = 0; j < countMoreClothes.lenght; j++){
-  //     if( countMoreClothes[j] === countLost[i]-1 || countMoreClothes[j] === countLost[i]+1){
-  //       countMoreClothes[j]= -1;
-  //       break;
-  //     }
-  //   }
-  // }
-  // const length = countMoreClothes.filter(el => !el == -1).length
-  // return n-length
+  return n - lost.length;
 }
